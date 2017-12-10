@@ -11,6 +11,7 @@
     "react-scripts": "1.0.17",
     "react-tap-event-plugin": "^3.0.2"
   },
+  "homepage": "https://chesla.github.io/folderApp/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
