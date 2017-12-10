@@ -118,15 +118,21 @@ class Folder extends Component{
         }
     }
     changeFolderName(event,value){
+        event.stopPropagation();
         this.setState({
             folderName:event.target.value
         })
-        event.stopPropagation();
+       
 
     }
     enterNewFolderName(event){
-        if(event.keyCode===13){
+        if(event.keyCode===13 && this.state.folderName.trim()){
             FolderStore.renameFolder(this.props.f,this.state.folderName,this.props.url)
+        }else if(event.keyCode===27){
+            this.setState({
+                renameFolder:false,
+                folderName:this.props.f
+            })
         }
        
     }
@@ -136,16 +142,17 @@ class Folder extends Component{
         return(
             <div className="folder-name-cnt"
                     onDoubleClick={()=>{
-                            browserHistory.push(`${url}/${folderName}`)
+                            renameFolder ? '' : browserHistory.push(`${url}/${folderName}`)
                         }
                     }>
                 <i className="fa fa-folder fa-2x" aria-hidden="true"></i> 
                 <div className="folder-name" 
                     onClick={(event)=>{
+                        event.stopPropagation();
                         this.setState({
                             renameFolder:true
                         });
-                        event.stopPropagation();
+                       
                     }}
                 >
                      {renameFolder ?
